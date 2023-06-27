@@ -17,7 +17,7 @@ df['Measurement date'] = df['Measurement date'].astype('str')
 df_date =df['Measurement date'].str.split(" ",n=1,expand=True) # 바로 데이터프레임의 컬럼으로 생성 expand=True
 
 df['date'] = df_date[0]
-df['time'] = df_date[1]
+df['time'] = df_date[1].str.slice(stop=2)
 df = df.drop(['Measurement date'],axis = 1)
 
 condition = (df['date'] == '2017-03-03')
