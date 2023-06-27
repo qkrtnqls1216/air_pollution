@@ -10,4 +10,4 @@ st.caption("""
 게임 플랫폼, 장르, 출시 연도 등을 기반으로 다양한 시각화를 통해
 비디오 게임 시장 동향과 인기 게임을 분석할 수 있습니다.
 """)
-st.image("img/welcome.png")
+st.image("img/air.jpg")
