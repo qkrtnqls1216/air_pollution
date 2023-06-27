@@ -13,9 +13,9 @@ df = pd.read_csv(
     "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv",
     encoding='cp949'
 )
-data[['Latitude', 'Longitude']] = data[['Latitude', 'Longitude']].replace("-", np.NaN)
-data[['Latitude', 'Longitude']] = data[['Latitude', 'Longitude']].astype('f')
-data.dropna(inplace=True)
+df[['Latitude', 'Longitude']] = df[['Latitude', 'Longitude']].replace("-", np.NaN)
+df[['Latitude', 'Longitude']] = df[['Latitude', 'Longitude']].astype('f')
+df.dropna(inplace=True)
 
 from datetime import datetime
 
