@@ -13,7 +13,7 @@ import common
 common.page_config()
 
 st.title("""2017-03-03 Dongjak-gu 
-            Pollution Level""")
+Pollution Level""")
 
 df = common.get_sales()
 df['Measurement date'] = df['Measurement date'].astype('str')
