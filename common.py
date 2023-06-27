@@ -8,5 +8,5 @@ def get_sales():
 def page_config():
     st.set_page_config(
         page_title="air pollution",
-        page_icon="🎮",
+        page_icon="🌊",
     )
