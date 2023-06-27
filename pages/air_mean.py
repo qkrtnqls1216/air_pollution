@@ -1,18 +1,31 @@
-import streamlit as st
+import os
+import numpy as np
 import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
 
 # 전체 데이터 읽어들이기
-df = pd.read_csv("https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv", encoding='cp949')
+df = pd.read_csv(
+    "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv",
+    encoding='cp949'
+)
+df
 
-# 숫자 열의 이름
-numeric_cols = ['SO2', 'NO2', 'O3', 'CO', 'PM10', 'PM2.5']
+from datetime import datetime
 
-# 비숫자 값을 NaN으로 변환
-df[numeric_cols] = df[numeric_cols].apply(pd.to_numeric, errors='coerce')
+df['Measurement date'] = df['Measurement date'].astype('datetime64')
+df['hour'] = df.loc[:, "Measurement date"].dt.hour
+# df = df.drop('Measurement date', axis=1)
 
-# 숫자 열의 평균 계산
-mean_values = df[numeric_cols].mean()
+data = df.groupby('hour', as_index=False).agg({'SO2':'mean', 'NO2':'mean', 'O3':'mean', 'CO':'mean', 'PM10':'mean', 'PM2.5':'mean'})
+data
 
-# 평균 출력
-for col, mean_value in mean_values.items():
-    st.write(f"Mean of {col}: {mean_value}")
+# 전체평균
+plt.figure(figsize=(10,10))
+air_1 = data.plot(x='hour', y=['SO2','NO2','O3'])
+air_1.grid()
+air_2 = data.plot(x='hour', y=['PM10', 'PM2.5'])
+air_2.grid()
+plt.yscale("log")
