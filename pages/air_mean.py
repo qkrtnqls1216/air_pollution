@@ -10,8 +10,7 @@ import folium
 
 # 전체 데이터 읽어들이기
 df = pd.read_csv(
-    "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv",
-    encoding='cp949'
+    "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv"
 )
 location = df.groupby('Station code')['PM2.5'].agg([np.mean]) # MAP에 PM2.5를 표현하기 위해 (PM2.5의 평균)
 location['Latitude'] = df['Latitude'].unique() # df의 Latitude 열 반환하여 각 지역의 PM2.5평균에 맞게 저장 
