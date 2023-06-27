@@ -9,10 +9,12 @@ from streamlit_folium import st_folium
 import folium
 
 # 전체 데이터 읽어들이기
-df = pd.read_csv(
-    "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv",
-    encoding='cp949'
-)
+common.page_config()
+
+st.title("Average Pollution Level")
+
+df = common.get_sales()
+
 df[['Latitude', 'Longitude']] = df[['Latitude', 'Longitude']].replace("-", np.NaN)
 df[['Latitude', 'Longitude']] = df[['Latitude', 'Longitude']].astype('f')
 df.dropna(inplace=True)
