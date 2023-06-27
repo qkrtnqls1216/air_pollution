@@ -11,7 +11,7 @@ import folium
 # 전체 데이터 읽어들이기
 common.page_config()
 
-st.title("Average Pollution Level")
+st.title("Average Pollution")
 
 df = common.get_sales()
 
