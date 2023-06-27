@@ -7,12 +7,10 @@ import seaborn as sns
 import streamlit as st
 from streamlit_folium import st_folium
 import folium
+import common
 
 # 전체 데이터 읽어들이기
-df = pd.read_csv(
-    "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv",
-    encoding='cp949'
-)
+common.page_config()
 
 # 위도 경도 DataFrame
 
