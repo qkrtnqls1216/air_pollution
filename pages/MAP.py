@@ -13,7 +13,6 @@ df = pd.read_csv(
     "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv",
     encoding='cp949'
 )
-df
 
 # 위도 경도 DataFrame
 
