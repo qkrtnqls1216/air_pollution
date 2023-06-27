@@ -12,7 +12,7 @@ import common
 # 전체 데이터 읽어들이기
 common.page_config()
 
-st.title("Average Pollution LEevel")
+st.title("Average Pollution Level")
 
 df = common.get_sales()
 
