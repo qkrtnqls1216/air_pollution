@@ -1,3 +1,4 @@
+import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
@@ -34,5 +35,5 @@ fig.update_layout(
     template='plotly_white'
 )
 
-# Show the plot
-fig.show()
+# Use Plotly to render the figure in Streamlit
+st.plotly_chart(fig)
