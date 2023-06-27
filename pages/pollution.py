@@ -38,11 +38,71 @@ Y4_sj = df_add['NO2']
 Y5_sj = df_add['O3']
 Y6_sj = df_add['CO']
 
-plt.figure(figsize = (12,10))
-plt.bar(X_sj,Y_sj,color = 'pink')
-# x축 레이블과 사이 간격 조정
-plt.title('PM10',fontsize = 20)
-plt.xlabel('Time',fontsize=15)
-plt.xticks(rotation=30, ha='right')
-plt.ylabel('Concentration',fontsize = 15)
-st.pyplot(plt)
+tab1, tab2 = st.tabs(["PM10","PM2.5","SO2", "NO2","O3","CO"])
+
+with tab1:
+    # PM10
+    plt.figure(figsize = (12,10))
+    plt.bar(X_sj,Y_sj,color = 'pink')
+    # x축 레이블과 사이 간격 조정
+    plt.title('PM10',fontsize = 20)
+    plt.xlabel('Time',fontsize=15)
+    plt.xticks(rotation=30, ha='right')
+    plt.ylabel('Concentration',fontsize = 15)
+    st.pyplot(plt)
+
+
+with tab2:
+    # PM2.5
+    plt.figure(figsize = (12,10))
+    plt.bar(X_sj,Y2_sj,color = 'orange')
+    plt.title('PM2.5',fontsize = 20)
+    plt.xlabel('Time',fontsize=15)
+    plt.xticks(rotation=30, ha='right')
+    plt.ylabel('Concentration',fontsize = 15)
+    plt.show()
+    ## 플레이데이터 주변 시간별 미세먼지 그래프
+
+with tab3:
+    # SO2
+    plt.figure(figsize = (12,10))
+    plt.bar(X_sj,Y3_sj,color = 'gray')
+    plt.title('SO2',fontsize = 20)
+    plt.xlabel('Time',fontsize=15)
+    plt.xticks(rotation=30, ha='right')
+    plt.ylabel('Concentration',fontsize = 15)
+    plt.show()
+    ## 플레이데이터 주변 시간별 미세먼지 그래프
+
+with tab4:
+    # NO2
+    plt.figure(figsize = (12,10))
+    plt.bar(X_sj,Y4_sj,color = 'lightskyblue')
+    plt.title('NO2',fontsize = 20)
+    plt.xlabel('Time',fontsize=15)
+    plt.xticks(rotation=30, ha='right')
+    plt.ylabel('Concentration',fontsize = 15)
+    plt.show()
+    ## 플레이데이터 주변 시간별 미세먼지 그래프
+
+with tab5:
+    # O3
+    plt.figure(figsize = (12,10))
+    plt.bar(X_sj,Y5_sj,color = 'rosybrown')
+    plt.title('O3',fontsize = 20)
+    plt.xlabel('Time',fontsize=15)
+    plt.xticks(rotation=30, ha='right')
+    plt.ylabel('Concentration',fontsize = 15)
+    plt.show()
+    ## 플레이데이터 주변 시간별 미세먼지 그래프
+
+with tab6:
+    # CO
+    plt.figure(figsize = (12,10))
+    plt.bar(X_sj,Y6_sj,color = 'yellowgreen')
+    plt.title('CO',fontsize = 20)
+    plt.xlabel('Time',fontsize=15)
+    plt.xticks(rotation=30, ha='right')
+    plt.ylabel('Concentration',fontsize = 15)
+    plt.show()
+    ## 플레이데이터 주변 시간별 미세먼지 그래프
