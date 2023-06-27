@@ -7,11 +7,12 @@ import seaborn as sns
 import streamlit as st
 from streamlit_folium import st_folium
 import folium
+import common
 
 # 전체 데이터 읽어들이기
 common.page_config()
 
-st.title("Average Pollution")
+st.title("Average Pollution LEevel")
 
 df = common.get_sales()
 
