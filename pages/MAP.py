@@ -3,9 +3,6 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 
-# Set your Mapbox token
-mapbox_token = "YOUR_MAPBOX_TOKEN"
-
 # 전체 데이터 읽어들이기
 df = pd.read_csv("https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv", encoding='cp949')
 
@@ -23,11 +20,10 @@ def color_select(x):
     else:
         return 'blue'
 
-# Create a scatter plot
+# Create a scatter plot with circle markers
 fig = go.Figure()
 
 for i in range(len(location)):
-    # 관측소
     fig.add_trace(go.Scattermapbox(
         lat=[location.iloc[i, 2]],
         lon=[location.iloc[i, 3]],
@@ -56,10 +52,9 @@ fig.add_trace(go.Scattermapbox(
 fig.update_layout(
     mapbox=dict(
         center=dict(lat=37.4971850, lon=126.927595),
-        zoom=14,
-        accesstoken=mapbox_token
+        zoom=14
     )
 )
 
-# Display the interactive map using Streamlit
+# Display the interactive scatter plot using Streamlit
 st.plotly_chart(fig)
