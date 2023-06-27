@@ -26,11 +26,15 @@ data = df.groupby('hour', as_index=False).agg({'SO2':'mean', 'NO2':'mean', 'O3':
 
 
 # 전체평균
-plt.figure(figsize=(10,10))
-air_1 = data.plot(x='hour', y=['SO2','NO2','O3'])
-air_1.grid()
-air_2 = data.plot(x='hour', y=['PM10', 'PM2.5'])
-air_2.grid()
-plt.yscale("log")
-st.pyplot(air_1)
-st.pyplot(air_2)
+fig, (ax1, ax2)  = plt.subplots(figsize = (15,15), nrows=2, ncols=1)
+ax1.plot(data['hour'],data['SO2'],label='SO2')
+ax1.plot(data['hour'],data['NO2'],label='NO2')
+ax1.plot(data['hour'],data['O3'],label='O3')
+ax1.plot(data['hour'],data['CO'],label='CO')
+ax1.grid()
+ax1.legend(loc="upper left")
+ax2.plot(data['hour'],data['PM10'],label='PM10')
+ax2.plot(data['hour'],data['PM2.5'],label='PM2.5')
+ax2.grid()
+ax2.legend(loc="upper left")
+st.pyplot(fig)
