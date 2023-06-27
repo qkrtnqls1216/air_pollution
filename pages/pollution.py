@@ -38,7 +38,7 @@ Y4_sj = df_add['NO2']
 Y5_sj = df_add['O3']
 Y6_sj = df_add['CO']
 
-tab1, tab2 = st.tabs(["PM10","PM2.5","SO2", "NO2","O3","CO"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["PM10","PM2.5","SO2", "NO2","O3","CO"])
 
 with tab1:
     # PM10
