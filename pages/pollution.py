@@ -9,10 +9,12 @@ from streamlit_folium import st_folium
 import folium
 import common
 
+
 # 전체 데이터 읽어들이기
 common.page_config()
 
-st.title("""2017-03-03 Dongjak-gu Pollution Level""")
+st.markdown(plat, unsafe_allow_html=True)
+plat = "<center>2017-03-03 Dongjak-gu Pollution Level</center>"
 
 df = common.get_sales()
 df['Measurement date'] = df['Measurement date'].astype('str')
