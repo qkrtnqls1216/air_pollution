@@ -1,10 +1,6 @@
-import os
-import numpy as np
 import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
-import seaborn as sns
-%matplotlib inline
 import plotly.express as px
 
 # 전체 데이터 읽어들이기
