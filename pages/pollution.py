@@ -14,7 +14,7 @@ import common
 common.page_config()
 
 st.markdown(plat, unsafe_allow_html=True)
-plat = "<center>2017-03-03 Dongjak-gu Pollution Level</center>"
+plat = "<h2 text-align:center>2017-03-03 Dongjak-gu Pollution Level</h2>"
 
 df = common.get_sales()
 df['Measurement date'] = df['Measurement date'].astype('str')
