@@ -5,7 +5,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-
+from streamlit_folium import st_folium
 
 # 전체 데이터 읽어들이기
 df = pd.read_csv(
