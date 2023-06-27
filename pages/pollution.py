@@ -12,8 +12,7 @@ import common
 # 전체 데이터 읽어들이기
 common.page_config()
 
-st.title("""2017-03-03 Dongjak-gu 
-Pollution Level""")
+st.title("""2017-03-03 Dongjak-gu Pollution Level""")
 
 df = common.get_sales()
 df['Measurement date'] = df['Measurement date'].astype('str')
