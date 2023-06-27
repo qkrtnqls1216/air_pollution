@@ -12,7 +12,7 @@ import common
 # 전체 데이터 읽어들이기
 common.page_config()
 
-st.title("PM2.5 MAP")
+st.title("PM2.5 MAP by Region")
 
 df = common.get_sales()
 
