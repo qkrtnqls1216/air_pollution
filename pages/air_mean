@@ -1,30 +1,38 @@
-import os
 import numpy as np
 import pandas as pd
-import matplotlib
-import matplotlib.pyplot as plt
-import seaborn as sns
-%matplotlib inline
+import plotly.graph_objects as go
 
 # 전체 데이터 읽어들이기
-df = pd.read_csv(
-    "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv",
-    encoding='cp949'
-)
-df
+df = pd.read_csv("https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv", encoding='cp949')
 
 from datetime import datetime
 
-df['Measurement date'] = df['Measurement date'].astype('datetime64')
-df['hour'] = df.loc[:, "Measurement date"].dt.hour
+df['Measurement date'] = pd.to_datetime(df['Measurement date'])
+df['hour'] = df['Measurement date'].dt.hour
 
-data = df.groupby('hour', as_index=False).agg({'SO2':'mean', 'NO2':'mean', 'O3':'mean', 'CO':'mean', 'PM10':'mean', 'PM2.5':'mean'})
-data
+data = df.groupby('hour', as_index=False).mean()
 
-# 전체평균
-plt.figure(figsize=(10,10))
-air_1 = data.plot(x='hour', y=['SO2','NO2','O3'])
-air_1.grid()
-air_2 = data.plot(x='hour', y=['PM10', 'PM2.5'])
-air_2.grid()
-plt.yscale("log")
+# Create subplots
+fig = go.Figure()
+
+# Add traces for SO2, NO2, and O3
+fig.add_trace(go.Scatter(x=data['hour'], y=data['SO2'], mode='lines', name='SO2'))
+fig.add_trace(go.Scatter(x=data['hour'], y=data['NO2'], mode='lines', name='NO2'))
+fig.add_trace(go.Scatter(x=data['hour'], y=data['O3'], mode='lines', name='O3'))
+
+# Create subplot for PM10 and PM2.5
+fig.add_trace(go.Scatter(x=data['hour'], y=data['PM10'], mode='lines', name='PM10', yaxis='y2'))
+fig.add_trace(go.Scatter(x=data['hour'], y=data['PM2.5'], mode='lines', name='PM2.5', yaxis='y2'))
+
+# Set layout
+fig.update_layout(
+    title='Air Pollution Levels by Hour',
+    xaxis=dict(title='Hour'),
+    yaxis=dict(title='SO2, NO2, O3', type='linear'),
+    yaxis2=dict(title='PM10, PM2.5', type='log', overlaying='y', side='right'),
+    legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
+    template='plotly_white'
+)
+
+# Show the plot
+fig.show()
