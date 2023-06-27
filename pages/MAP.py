@@ -57,5 +57,5 @@ fig.update_layout(
     )
 )
 
-# Show the interactive map
-fig.show()
+# Display the interactive map using Streamlit
+st.plotly_chart(fig)
