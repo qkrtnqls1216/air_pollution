@@ -12,6 +12,10 @@ import common
 # 전체 데이터 읽어들이기
 common.page_config()
 
+st.title("Number of Video Games by Genre")
+
+df = common.get_sales()
+
 # 위도 경도 DataFrame
 
 location = df.groupby('Station code')['PM2.5'].agg([np.mean]) # MAP에 PM2.5를 표현하기 위해 (PM2.5의 평균)
