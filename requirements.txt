@@ -2,3 +2,4 @@ matplotlib
 seaborn
 plotly
 folium
+streamlit_folium
