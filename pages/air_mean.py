@@ -4,12 +4,14 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+import common
 
 # 전체 데이터 읽어들이기
-df = pd.read_csv(
-    "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv",
-    encoding='cp949'
-)
+common.page_config()
+
+st.title("Number of Video Games by Genre")
+
+df = common.get_sales()
 
 from datetime import datetime
 
