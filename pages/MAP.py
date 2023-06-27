@@ -1,7 +1,6 @@
+import numpy as np
 import pandas as pd
-import matplotlib
-import matplotlib.pyplot as plt
-import plotly.express as px
+import plotly.graph_objects as go
 
 # 전체 데이터 읽어들이기
 df = pd.read_csv("https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv", encoding='cp949')
@@ -20,25 +19,42 @@ def color_select(x):
     else:
         return 'blue'
 
-# Map
-seoul = folium.Map(location=[37.4971850, 126.927595], zoom_start=14)
+# Create a scatter plot
+fig = go.Figure()
 
-# Circle
 for i in range(len(location)):
     # 관측소
-    folium.Circle(
-        location=[location.iloc[i, 2], location.iloc[i, 3]],
-        radius=location.iloc[i, 1] * 40,
-        color=color_select(location.iloc[i, 1]),
-        fill_color='#ffffgg'
-    ).add_to(seoul)
+    fig.add_trace(go.Scattermapbox(
+        lat=[location.iloc[i, 2]],
+        lon=[location.iloc[i, 3]],
+        mode='markers',
+        marker=dict(
+            size=location.iloc[i, 1] * 40,
+            color=color_select(location.iloc[i, 1])
+        ),
+        hovertext=location.iloc[i, 1]
+    ))
 
-# Marker / Sejong Univ.
-folium.Marker(
-    [37.4971850, 126.927595],
-    icon=folium.Icon(popup='아지트', color='red', icon='glyphicon glyphicon-home')
-).add_to(seoul)
+# Add a marker for Sejong Univ.
+fig.add_trace(go.Scattermapbox(
+    lat=[37.4971850],
+    lon=[126.927595],
+    mode='markers',
+    marker=dict(
+        color='red',
+        size=10,
+        symbol='home'
+    ),
+    hovertext='Sejong Univ.'
+))
 
-# Convert Folium map to Plotly figure
-fig = px.imshow(seoul._to_png(), origin='lower')
+# Set map layout
+fig.update_layout(
+    mapbox=dict(
+        center=dict(lat=37.4971850, lon=126.927595),
+        zoom=14
+    )
+)
+
+# Show the interactive map
 fig.show()
