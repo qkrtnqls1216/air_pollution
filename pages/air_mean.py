@@ -11,7 +11,10 @@ from datetime import datetime
 df['Measurement date'] = pd.to_datetime(df['Measurement date'])
 df['hour'] = df['Measurement date'].dt.hour
 
-data = df.groupby('hour', as_index=False).mean()
+numeric_cols = ['SO2', 'NO2', 'O3', 'CO', 'PM10', 'PM2.5']
+df_numeric = df[numeric_cols]
+
+data = df_numeric.groupby(df['hour'], as_index=False).mean()
 
 # Create subplots
 fig = go.Figure()
