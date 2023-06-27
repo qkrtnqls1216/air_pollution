@@ -7,12 +7,14 @@ import seaborn as sns
 import streamlit as st
 from streamlit_folium import st_folium
 import folium
+import common
 
 # 전체 데이터 읽어들이기
-df = pd.read_csv(
-    "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv",
-    encoding='cp949'
-)
+common.page_config()
+
+st.title("2017-03-03 Dongjak-gu Pollution Level")
+
+df = common.get_sales()
 df['Measurement date'] = df['Measurement date'].astype('str')
 df_date =df['Measurement date'].str.split(" ",n=1,expand=True) # 바로 데이터프레임의 컬럼으로 생성 expand=True
 
