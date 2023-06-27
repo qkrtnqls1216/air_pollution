@@ -18,7 +18,6 @@ df[['Latitude', 'Longitude']] = df[['Latitude', 'Longitude']].astype('f')
 df.dropna(inplace=True)
 
 from datetime import dt
-import 
 
 df['Measurement date'] = df['Measurement date'].astype('datetime64')
 df['hour'] = df.loc[:, "Measurement date"].dt.hour
