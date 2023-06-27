@@ -1,15 +1,28 @@
-import streamlit as st
+import os
 import numpy as np
 import pandas as pd
-import plotly.graph_objects as go
+import matplotlib
+import matplotlib.pyplot as plt
+import seaborn as sns
+import streamlit as st
+
 
 # 전체 데이터 읽어들이기
-df = pd.read_csv("https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv", encoding='cp949')
+df = pd.read_csv(
+    "https://media.githubusercontent.com/media/qkrtnqls1216/air_pollution/main/Measurement_summary.csv",
+    encoding='cp949'
+)
+df
 
 # 위도 경도 DataFrame
-location = df.groupby('Station code')['PM2.5'].mean().reset_index()
-location['Latitude'] = df.groupby('Station code')['Latitude'].first().values
-location['Longitude'] = df.groupby('Station code')['Longitude'].first().values
+
+location = df.groupby('Station code')['PM2.5'].agg([np.mean]) # MAP에 PM2.5를 표현하기 위해 (PM2.5의 평균)
+location['Latitude'] = df['Latitude'].unique() # df의 Latitude 열 반환하여 각 지역의 PM2.5평균에 맞게 저장 
+location['Longitude'] = df['Longitude'].unique()  # df의 Longitude 열 반환
+location.head()
+
+import folium
+from folium.plugins import MarkerCluster
 
 # PM10에 따른 color 변화
 def color_select(x):
@@ -20,41 +33,14 @@ def color_select(x):
     else:
         return 'blue'
 
-# Create a scatter plot with circle markers
-fig = go.Figure()
+# Map
+seoul = folium.Map(location=[37.4971850, 126.927595], zoom_start=14) # 플레이데이터 캠퍼스 좌표 기준
 
+# Circle
 for i in range(len(location)):
-    fig.add_trace(go.Scattermapbox(
-        lat=[location.iloc[i, 2]],
-        lon=[location.iloc[i, 3]],
-        mode='markers',
-        marker=dict(
-            size=location.iloc[i, 1] * 40,
-            color=color_select(location.iloc[i, 1])
-        ),
-        hovertext=location.iloc[i, 1]
-    ))
-
-# Add a marker for Sejong Univ.
-fig.add_trace(go.Scattermapbox(
-    lat=[37.4971850],
-    lon=[126.927595],
-    mode='markers',
-    marker=dict(
-        color='red',
-        size=10,
-        symbol='home'
-    ),
-    hovertext='Sejong Univ.'
-))
-
-# Set map layout
-fig.update_layout(
-    mapbox=dict(
-        center=dict(lat=37.4971850, lon=126.927595),
-        zoom=14
-    )
-)
-
-# Display the interactive scatter plot using Streamlit
-st.plotly_chart(fig)
+    # 관측소
+    folium.Circle(location=[location.iloc[i,1], location.iloc[i,2]], radius = location.iloc[i, 0]*40, color=color_select(location.iloc[i,0]),fill_color='#ffffgg').add_to(seoul)
+    
+# Marker / Sejong Univ.
+folium.Marker([37.4971850, 126.927595], icon=folium.Icon(popup='아지트', color='red', icon='glyphicon glyphicon-home')).add_to(seoul)
+st_folium(seoul)
