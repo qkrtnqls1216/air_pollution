@@ -60,7 +60,7 @@ with tab2:
     plt.xlabel('Time',fontsize=15)
     plt.xticks(rotation=30, ha='right')
     plt.ylabel('Concentration',fontsize = 15)
-    plt.show()
+    st.pyplot(plt)
     ## 플레이데이터 주변 시간별 미세먼지 그래프
 
 with tab3:
@@ -71,7 +71,7 @@ with tab3:
     plt.xlabel('Time',fontsize=15)
     plt.xticks(rotation=30, ha='right')
     plt.ylabel('Concentration',fontsize = 15)
-    plt.show()
+    st.pyplot(plt)
     ## 플레이데이터 주변 시간별 미세먼지 그래프
 
 with tab4:
@@ -82,7 +82,7 @@ with tab4:
     plt.xlabel('Time',fontsize=15)
     plt.xticks(rotation=30, ha='right')
     plt.ylabel('Concentration',fontsize = 15)
-    plt.show()
+    st.pyplot(plt)
     ## 플레이데이터 주변 시간별 미세먼지 그래프
 
 with tab5:
@@ -93,7 +93,7 @@ with tab5:
     plt.xlabel('Time',fontsize=15)
     plt.xticks(rotation=30, ha='right')
     plt.ylabel('Concentration',fontsize = 15)
-    plt.show()
+    st.pyplot(plt)
     ## 플레이데이터 주변 시간별 미세먼지 그래프
 
 with tab6:
@@ -104,5 +104,5 @@ with tab6:
     plt.xlabel('Time',fontsize=15)
     plt.xticks(rotation=30, ha='right')
     plt.ylabel('Concentration',fontsize = 15)
-    plt.show()
+    st.pyplot(plt)
     ## 플레이데이터 주변 시간별 미세먼지 그래프
