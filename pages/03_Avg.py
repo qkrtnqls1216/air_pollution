@@ -1,42 +1,34 @@
-import os
-import numpy as np
-import pandas as pd
-import matplotlib
+import streamlit as st
+import common
 import matplotlib.pyplot as plt
 import seaborn as sns
-import streamlit as st
-from streamlit_folium import st_folium
-import folium
-import common
+from scipy.stats import linregress
+import pandas as pd
 
-# 전체 데이터 읽어들이기
+
 common.page_config()
+st.title("Average PM10 for all districts (2017-2019) Visualization")
+st.divider()
 
-st.title("Average Pollution Level")
+lineplot_df = common.get_sales()
+lineplot_df['Measurement date'] = pd.to_datetime(lineplot_df['Measurement date'])
+lineplot_df.set_index('Measurement date', inplace=True)
+lineplot_df.drop(["SO2", "NO2", "O3", "CO", "PM2.5"], axis=1, inplace=True)
 
-df = common.get_sales()
+lineplot_df["Year"] = lineplot_df.index.year
+lineplot_df["Month"] = lineplot_df.index.month
 
-df[['Latitude', 'Longitude']] = df[['Latitude', 'Longitude']].replace("-", np.NaN)
-df[['Latitude', 'Longitude']] = df[['Latitude', 'Longitude']].astype('f')
-df.dropna(inplace=True)
+lineplot_df["Year and Month"] = lineplot_df[["Year", "Month"]].astype(str).agg("-".join, axis=1)
+lineplot_df["PM10avg"] = lineplot_df.groupby(["Year and Month"])["PM10"].transform("mean")
 
-from datetime import datetime 
+lineplot_df.drop_duplicates(subset="Year and Month", inplace=True)
 
-df['Measurement date'] = pd.to_datetime(df['Measurement date'])
-df['hour'] = df.loc[:, "Measurement date"].dt.hour
+fig, ax = plt.subplots(figsize=(20, 10), constrained_layout=True)
+fig.suptitle("Average PM10 for all districts (2017-2019)", fontsize=20, fontweight="bold")
+lp = sns.lineplot(x=lineplot_df["Year and Month"], y=lineplot_df["PM10avg"], sort=False, ax=ax)
+lp.set_ylabel("Average PM10", fontsize=20)
+lp.set_xlabel("Year and Month", fontsize=20)
+lp.set_xticklabels(lineplot_df["Year and Month"].values, rotation=40, ha="right")
 
-data = df.groupby('hour', as_index=False).agg({'SO2':'mean', 'NO2':'mean', 'O3':'mean', 'CO':'mean', 'PM10':'mean', 'PM2.5':'mean'})
-
-
-# 전체평균
-fig, (ax1, ax2)  = plt.subplots(figsize = (15,15), nrows=2, ncols=1)
-ax1.plot(data['hour'],data['SO2'],label='SO2')
-ax1.plot(data['hour'],data['NO2'],label='NO2')
-ax1.plot(data['hour'],data['O3'],label='O3')
-ax1.grid()
-ax1.legend(loc="upper left")
-ax2.plot(data['hour'],data['PM10'],label='PM10')
-ax2.plot(data['hour'],data['PM2.5'],label='PM2.5')
-ax2.grid()
-ax2.legend(loc="upper left")
+# Streamlit 앱에 그래프 출력
 st.pyplot(fig)
