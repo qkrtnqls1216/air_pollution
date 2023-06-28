@@ -6,7 +6,7 @@ import seaborn as sns
 import streamlit as st
 import common
 
-common.page_config(layout="wide")
+common.page_config()
 
 st.title("SO2 barplot")
 st.divider()
