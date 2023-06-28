@@ -26,7 +26,7 @@ SO2 = SO2_Address.sort_values('SO2',ascending=False).head(10)
 
 plt.figure(figsize=(12,35))
 
- plt.subplot(6,1,1)
+plt.subplot(6,1,1)
 sns.barplot(y="Address", x="SO2", data = SO2_Address.head(10))
 
 # st_folium()
