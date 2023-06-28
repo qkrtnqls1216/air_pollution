@@ -21,7 +21,7 @@ variables = [('NO2', 'PM10'), ('NO2', 'PM2.5'), ('CO', 'PM10'), ('CO', 'PM2.5'),
              ('SO2', 'PM10'), ('SO2', 'PM2.5'), ('O3', 'PM10'), ('O3', 'PM2.5')]
 
 width = st.sidebar.slider("plot width", 0.1, 25., 10.)
-height = st.sidebar.slider("plot height", 0.1, 25., 10.)
+height = st.sidebar.slider("plot height", 0.1, 25., 12.)
 
 tab1, tab2 = st.tabs(["미세먼지 상관관계", "오존 상관관계"])
 
