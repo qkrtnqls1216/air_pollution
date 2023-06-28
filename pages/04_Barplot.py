@@ -6,13 +6,11 @@ import seaborn as sns
 import streamlit as st
 import common
 
-common.page_config()
+common.page_config(layout="wide")
 
 st.title("SO2 barplot")
 st.divider()
 df = common.get_sales()
-
-st.set_page_config(layout="wide")
 
 
 # SO2 비율이 높은 정보 10개 출력
