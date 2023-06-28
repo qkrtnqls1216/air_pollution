@@ -1,5 +1,6 @@
-matplotlib
+streamlit-folium
+folium
 seaborn
 plotly
-folium
-streamlit_folium
+scipy
+pandas
