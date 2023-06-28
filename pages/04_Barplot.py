@@ -32,4 +32,4 @@ plt.figure(figsize=(12,35))
 sns.barplot(y="Address", x="SO2", data = SO2_Address.head(10))
 
 # st_folium()
- st.pyplot(plt)
+st.pyplot(plt)
