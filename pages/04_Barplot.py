@@ -24,7 +24,7 @@ SO2_Address = df.groupby('Address').agg({'SO2' : 'median'}).sort_values('SO2',as
 SO2 = SO2_Address.sort_values('SO2',ascending=False).head(10)
 
 
-fig, ax = plt.subplots(figsize=(12,35))
+fig, ax = plt.subplots(figsize=(12,10))
 
 sns.barplot(y="Address", x="SO2", data = SO2_Address.head(10), ax=ax)
 plt.title('SO2 by Address Top 10')
