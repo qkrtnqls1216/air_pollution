@@ -5,7 +5,7 @@ import seaborn as sns
 from scipy.stats import linregress
 
 common.page_config()
-st.set_page_config(layout="wide")
+# st.set_page_config(layout="wide")
 
 st.title("Regplot Visualization")
 
