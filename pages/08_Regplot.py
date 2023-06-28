@@ -36,7 +36,7 @@ with tab1:
 
 with tab2:
   fig, ax = plt.subplots(3, 1, figsize=(10,15))
-  fig.set_size_inches(12, 18) # 전체 plot의 크기 조정
+  fig.set_size_inches(12, 12) # 전체 plot의 크기 조정
   
   variables = [('O3', 'SO2'), ('O3', 'NO2'), ('O3', 'CO')]
   for i, (x_var, y_var) in enumerate(variables):
