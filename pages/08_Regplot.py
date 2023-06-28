@@ -29,16 +29,15 @@ with tab1:
   fig, ax = plt.subplots(4, 2, figsize=(width, height))
   
   for i, (x_var, y_var) in enumerate(variables):
-      row = i // 2
-      col = i % 2
+    row = i // 2
+    col = i % 2
 
-      sns.regplot(x=x_var, y=y_var, data=df_0, ax=ax[row, col], ci=99, line_kws={'color': 'red'})
-      slope, intercept, r_value, p_value, std_err = linregress(df_0[x_var], df_0[y_var])
-      equation = f'R-squared: {r_value**2:.2f}'
-      ax[row, col].text(0.05, 0.95, equation, transform=ax[row, col].transAxes, fontsize=12, verticalalignment='top', color='green')
-      fig.tight_layout()
-  with st.echo():
-    st.pyplot(fig)
+    sns.regplot(x=x_var, y=y_var, data=df_0, ax=ax[row, col], ci=99, line_kws={'color': 'red'})
+    slope, intercept, r_value, p_value, std_err = linregress(df_0[x_var], df_0[y_var])
+    equation = f'R-squared: {r_value**2:.2f}'
+    ax[row, col].text(0.05, 0.95, equation, transform=ax[row, col].transAxes, fontsize=12, verticalalignment='top', color='green')
+    fig.tight_layout()
+  st.pyplot(fig)
 
 
 with tab2:
@@ -46,9 +45,8 @@ with tab2:
   
   variables = [('O3', 'SO2'), ('O3', 'NO2'), ('O3', 'CO')]
   for i, (x_var, y_var) in enumerate(variables):
-      sns.regplot(x=x_var, y=y_var, data=df_0, ax=ax[i], ci=99, line_kws={'color': 'red'})
-      slope, intercept, r_value, p_value, std_err = linregress(df_0[x_var], df_0[y_var])
-      equation = f'R-squared: {r_value**2:.2f}'
-      ax[i].text(0.05, 0.95, equation, transform=ax[i].transAxes, fontsize=12, verticalalignment='top', color='green')
-  with st.echo():
-    st.pyplot(fig)
+    sns.regplot(x=x_var, y=y_var, data=df_0, ax=ax[i], ci=99, line_kws={'color': 'red'})
+    slope, intercept, r_value, p_value, std_err = linregress(df_0[x_var], df_0[y_var])
+    equation = f'R-squared: {r_value**2:.2f}'
+    ax[i].text(0.05, 0.95, equation, transform=ax[i].transAxes, fontsize=12, verticalalignment='top', color='green')
+  st.pyplot(fig)
