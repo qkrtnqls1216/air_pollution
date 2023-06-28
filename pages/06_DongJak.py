@@ -1,3 +1,4 @@
+# pollution.py (동작구 2017-03-03의 시간별 오염도)
 import os
 import numpy as np
 import pandas as pd
@@ -10,10 +11,12 @@ import folium
 import common
 
 
+
 # 전체 데이터 읽어들이기
 common.page_config()
+p = st.selectbox("**Place**", ["Dongjak", "Gwangjin", "Jongno", "Gangnam"])
 
-st.title("2017-03-03 Dongjak-gu Pollution Level")
+st.title(f"2017-03-03 {p} Pollution Level")
 
 df = common.get_sales()
 df['Measurement date'] = df['Measurement date'].astype('str')
@@ -26,9 +29,17 @@ df = df.drop(['Measurement date'],axis = 1)
 condition = (df['date'] == '2017-03-03')
 df_birth = df[condition]
 
-address_fixed = df["Address"].unique()[-6]
+address_fixed = df["Address"].unique()
 
-condition = (df_birth.Address == address_fixed)
+if p == "Dongjak":
+    condition = (df_birth.Address == '6, Sadang-ro 16a-gil, Dongjak-gu, Seoul, Republic of Korea')
+elif p == "Gwangjin":
+    condition = (df_birth.Address == '571, Gwangnaru-ro, Gwangjin-gu, Seoul, Republic of Korea')
+elif p == "Jongno":
+    condition = (df_birth.Address == '19, Jong-ro 35ga-gil, Jongno-gu, Seoul, Republic of Korea')
+elif p == "Gangnam":
+    condition = (df_birth.Address == '426, Hakdong-ro, Gangnam-gu, Seoul, Republic of Korea')
+
 df_add = df_birth[condition]
 
 df_add = df_add.loc[:,['SO2','NO2','O3','CO','PM10','PM2.5','time']]
@@ -108,4 +119,4 @@ with tab6:
     plt.xticks(rotation=30, ha='right')
     plt.ylabel('Concentration',fontsize = 15)
     st.pyplot(plt)
-    ## 플레이데이터 주변 시간별 미세먼지 그래프
+    ## 플레이데이터 주변 시간별 미세먼지 그래프# pollution.py (동작구 2017-03-03의 시간별 오염도)
